@@ -1,0 +1,22 @@
+Hey,
+
+What you have run is n^3 complexity. You can do it in nlogn complexity.
+
+Instead of approaching the problem from 1st element (i), approach from the middle element j
+
+start with j=2 till n-2 (included), for each a[j] now you have to find one a[k] on the right side of array i.e k=j+1 to n-1(included) and you have to find one a[i] where i=0 to j-1 (included).
+
+now we know a[k] is the highest among the triplets, so it has no bound. to maximize the sum we have to chose the max from the subarray a[j+1, n] - this can be achieved in O(1) time and O(n) space through the use of maximum suffix array (an array which stores from right to left, at any given index, the maximum value seen till that index. i.e if a[5] = 10 it means from index n to 5, max value in array is 10)
+
+Now, you have to find a[i] from left subarray such that it satisfies two conditions:
+it is less than a[j]
+it is max among all elements that are < a[j]
+only then you can maximize the triplet sum.
+
+you can achieve it using a Set in java. check geeksforgeeks for treeset-lower-method-in-java
+
+so you insert elements of a[0, j-1] in set and then call set.lower(a[j]) -> this will return the greatest element in set that is lesser than a[j]
+
+after you find a[i] and a[k], find the triplet sum, compare it with max.
+
+Hope this helps
