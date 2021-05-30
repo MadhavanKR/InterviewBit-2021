@@ -1,0 +1,29 @@
+The problem becomes easier if we look at it as a sorting problem than an arrangement one.
+we need to sort the input array in such a way that when we combine two array elements the combined number must be greater.
+
+take an example: [3, 30, 34, 5, 9]
+the natural decreasing order will be [34, 30, 9, 5, 3]
+however, if we combine these we get 3430953 but the largest possible number after combining these numbers is 9534330
+
+so inorder to do that we have to sort the numbers in such a way that rather than number being individually bigger when they are combined they must be bigger.
+
+in this case, if we take three numbers for example [9, 34, 8], naturally the decreasing order is [34,9,8] but in our case it must be [9, 8 , 34] reason as follows:
+
+9 comparision with 34: 934 > 349, so it stays.
+9 comparision with 8: 98 > 89, so it stays.
+final sorted position for 9 is 0th index
+
+34 comparison with 8: 348 < 834 so swap -> 34 goes to index 2
+
+so after sorting we have [9, 8, 34] and the largest possible number is just concatenation from 0th index to last index
+
+sample comparator function for above sorting:
+func(i, j int) bool {
+		ab := str[i]+str[j]
+		ba := str[j]+str[i]
+		if ab>=ba {
+			return true
+		} else {
+			return false
+		}
+}
